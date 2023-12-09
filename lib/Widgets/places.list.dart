@@ -26,9 +26,14 @@ class PlacesList extends StatelessWidget {
                   return PlaceDetailScreen(place: places[index]);
                 }));
               },
+              leading: CircleAvatar(
+                radius: 26,
+                backgroundImage: FileImage(places[index].image),
+              ),
+              contentPadding: EdgeInsets.all(8),
               title: Text(
                 places[index].title,
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
             );
           });

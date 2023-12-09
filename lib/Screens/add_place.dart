@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:favourite_place/Providers/user_places.dart';
+import 'package:favourite_place/Widgets/image_input.dart';
 import 'package:favourite_place/models/place.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,13 +16,14 @@ class AddPlaceScreen extends ConsumerStatefulWidget {
 
 class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
   final _titleController = TextEditingController();
+  late File _selectedImage;
 
   void _savePlace() {
     final enteredText = _titleController.text;
     if (enteredText.isEmpty) {
       return;
     }
-    ref.read(userPlacesProvider.notifier).addPlace(enteredText);
+    ref.read(userPlacesProvider.notifier).addPlace(enteredText, _selectedImage!);
     // agar hmm sirf provider name read kr rhe hai, agar hme notifier class read krni hai toh .notifier likho
     Navigator.of(context).pop();
   }
@@ -43,11 +47,19 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
           children: [
             TextField(
               style: TextStyle(
-                color: Theme.of(context).colorScheme.onBackground,
+                color: Theme.of(context).colorScheme.primary,
               ),
-              decoration: InputDecoration(labelText: "Place"),
+              decoration: InputDecoration(
+                  hintText: "Place",
+                  hintStyle: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                    fontSize: 15,
+                  )),
               controller: _titleController,
             ),
+            ImageInput(onPickImage: (image) {
+              _selectedImage = image;
+            }),
             SizedBox(
               height: 20,
             ),

@@ -1,11 +1,15 @@
+import 'dart:io';
+
 import 'package:uuid/uuid.dart';
 
 var uuid = Uuid();
-class Place{
-  Place({required this.title}){
 
+class Place {
+  Place({required this.title, required this.image}) {
     id = uuid.v4();
   }
+
   late final String id;
   final String title;
+  final File image;
 }
