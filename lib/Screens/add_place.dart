@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:favourite_place/Providers/user_places.dart';
 import 'package:favourite_place/Widgets/image_input.dart';
+import 'package:favourite_place/Widgets/location_input.dart';
 import 'package:favourite_place/models/place.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,9 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
     if (enteredText.isEmpty) {
       return;
     }
-    ref.read(userPlacesProvider.notifier).addPlace(enteredText, _selectedImage!);
+    ref
+        .read(userPlacesProvider.notifier)
+        .addPlace(enteredText, _selectedImage!);
     // agar hmm sirf provider name read kr rhe hai, agar hme notifier class read krni hai toh .notifier likho
     Navigator.of(context).pop();
   }
@@ -60,6 +63,10 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
             ImageInput(onPickImage: (image) {
               _selectedImage = image;
             }),
+            SizedBox(
+              height: 10,
+            ),
+            LocationInput(),
             SizedBox(
               height: 20,
             ),

@@ -40,10 +40,13 @@ class _ImageInputState extends State<ImageInput> {
         label: Text("Add icon"));
 
     if (_selectedImage != null) {
-      content = Image.file(
-        _selectedImage!,
-        fit: BoxFit.fill,
-        width: double.infinity,
+      content = GestureDetector(
+        onTap: _takePicture,
+        child: Image.file(
+          _selectedImage!,
+          fit: BoxFit.fill,
+          width: double.infinity,
+        ),
       );
     }
 
